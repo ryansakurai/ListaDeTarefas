@@ -45,8 +45,8 @@ A interface gráfica foi implementada usando a bibliteca de interface gráfica G
 Devido ao uso de uma lista ordenada, quando uma remoção é desfeita, a atividade não voltará à sua posição exata, mas sim ao topo das tarefas da mesma prioridade.
 
 ## Autor
-Guilherme Bortoletto
-Ryan Sakurai
-Vinicius Castro
+- Guilherme Bortoletto
+- Ryan Sakurai
+- Vinicius Castro
 
 (Estudantes de Ciência da Computação na UFSCAR)
