@@ -44,7 +44,7 @@ A interface gráfica foi implementada usando a bibliteca de interface gráfica G
 ## Bugs/problemas conhecidos
 Devido ao uso de uma lista ordenada, quando uma remoção é desfeita, a atividade não voltará à sua posição exata, mas sim ao topo das tarefas da mesma prioridade.
 
-## Autor
+## Autores
 - Guilherme Bortoletto
 - Ryan Sakurai
 - Vinicius Castro
