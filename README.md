@@ -33,7 +33,7 @@ Ao clicar em “Desfazer ação”:
 - se a ultima ação foi remover uma atividade, ela será adicionada à lista como uma nova
 atividade.
 
-![imagem](hhttps://github.com/ryansakurai/ListaDeTarefas/blob/main/images/img4.png)
+![imagem](https://github.com/ryansakurai/ListaDeTarefas/blob/main/images/img4.png)
 
 ## Recursos utilizados
 O programa foi feito usando a biblioteca padrão da linguagem C e a biblioteca GTK3.
