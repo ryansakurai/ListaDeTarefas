@@ -49,4 +49,4 @@ Devido ao uso de uma lista ordenada, quando uma remoção é desfeita, a ativida
 - [Ryan Sakurai](https://github.com/ryansakurai)
 - [Vinicius Castro](https://github.com/vinciuscastro)
 
-(Estudantes de Ciência da Computação na UFSCAR)
+(Estudantes de Ciência da Computação na UFSCar)
