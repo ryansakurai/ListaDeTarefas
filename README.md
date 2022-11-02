@@ -1,7 +1,7 @@
-# Lista de Tarefas - Projeto de Estruturas de Dados
+# Lista de Tarefas
 
 ## Conceito
-Projeto que implementa uma lista de tarefas com interface gráfica, com funcionalidade para escolher prioridade, adicionar tarefa, remover tarefa, desfazer ação e visualizar suas tarefas.
+Projeto que implementa uma lista de tarefas com interface gráfica, com funcionalidade para escolher prioridade, adicionar tarefa, remover tarefa, desfazer ação e visualizar suas tarefas. Feito para a disciplina de Estruturas de Dados
 
 ## Como usar
 Ao executar o programa, a interface gráfica aparecerá.
@@ -45,8 +45,8 @@ A interface gráfica foi implementada usando a bibliteca de interface gráfica G
 Devido ao uso de uma lista ordenada, quando uma remoção é desfeita, a atividade não voltará à sua posição exata, mas sim ao topo das tarefas da mesma prioridade.
 
 ## Autores
-- Guilherme Bortoletto (https://github.com/guilherme-bortoletto)
-- Ryan Sakurai (https://github.com/ryansakurai)
-- Vinicius Castro (https://github.com/vinciuscastro)
+- [Guilherme Bortoletto](https://github.com/guilherme-bortoletto)
+- [Ryan Sakurai](https://github.com/ryansakurai)
+- [Vinicius Castro](https://github.com/vinciuscastro)
 
 (Estudantes de Ciência da Computação na UFSCAR)
