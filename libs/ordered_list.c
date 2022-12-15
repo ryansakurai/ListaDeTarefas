@@ -2,25 +2,25 @@
 //Ryan Sakurai
 //Vinicius Castro
 
-#include "lista_ordenada.h"
+#include "ordered_list.h"
 
-void loinicializar(lo_lista *l, int (*cmp)(void *a, void *b))
-{
+
+void ol_init(OrderedList *list, int (*compare)(void *a, void *b)) {
     l->sentinela->ant = l->sentinela->prox = l->sentinela = (lo_node*) malloc(sizeof(lo_node));
     l->tamanho = 0;
     l->cmp = cmp;
 }
 
-void lodestruir(lo_lista *l)
-{
+
+void ol_destroy(OrderedList *list) {
     while(!lovazia(l))
         lopopi(l);
     
     free(l->sentinela);
 }
 
-void lopush(lo_lista *l, T dado)
-{
+
+void ol_push(OrderedList *list, T data) {
     lo_node *novo = (lo_node*) malloc(sizeof(lo_node));
     novo->dado = dado;
 
@@ -37,8 +37,8 @@ void lopush(lo_lista *l, T dado)
     l->tamanho++;
 }
 
-T lopopi(lo_lista *l)
-{
+
+T ol_pop_first(OrderedList *list) {
     if(!lovazia(l))
     {
         lo_node *removido = l->sentinela->prox;
@@ -56,8 +56,8 @@ T lopopi(lo_lista *l)
     }
 }
 
-T lopopf(lo_lista *l)
-{
+
+T ol_pop_last(OrderedList *list) {
     if(!lovazia(l))
     {
         lo_node *removido = l->sentinela->ant;
@@ -75,63 +75,44 @@ T lopopf(lo_lista *l)
     }
 }
 
-T loprimeiro(lo_lista *l)
-{
+
+T ol_get_first(OrderedList *list) {
     if(!lovazia(l))
         return l->sentinela->prox->dado;
 }
 
-T loultimo(lo_lista *l)
-{
+
+T ol_get_last(OrderedList *list) {
     if(!lovazia(l))
         return l->sentinela->ant->dado;
 }
 
-unsigned lotamanho(lo_lista *l)
-{
+
+unsigned ol_get_size(OrderedList *list) {
     return l->tamanho;
 }
 
-bool lovazia(lo_lista *l)
-{
+
+bool ol_is_empty(OrderedList *list) {
     if(l->tamanho)
         return false;
     else
         return true;
 }
 
-void loiteradori(lo_lista *l, lo_iterador *i)
-{
+
+void ol_iter_init(OLIterator *iter, OrderedList *list) {
     i->estrutura = l;
     i->elemento = l->sentinela->prox;
 }
 
-void loiteradorf(lo_lista *l, lo_iterador *i)
-{
-    i->estrutura = l;
-    i->elemento = l->sentinela->ant;
-}
 
-void lomoverant(lo_iterador *i)
-{
-    i->elemento = i->elemento->ant;
-}
-
-void lomoverprox(lo_iterador *i)
-{
+void ol_iter_next(OLIterator *iter) {
     i->elemento = i->elemento->prox;
 }
 
-bool loacabou(lo_iterador *i)
-{
-    if(i->elemento == i->estrutura->sentinela)
-        return true;
-    else
-        return false;
-}
 
-bool loprocurar(lo_iterador *i, T dado, int (*cmp)(void *a, void *b))
-{
+bool ol_search(OLIterator *iter, int (*compare)(void *a, void *b), T data) {
     //procurando o elemento
     for(loiteradori(i->estrutura, i); !loacabou(i) && !(*cmp)(&dado, &i->elemento->dado); lomoverprox(i));
 
@@ -141,14 +122,14 @@ bool loprocurar(lo_iterador *i, T dado, int (*cmp)(void *a, void *b))
         return true;
 }
 
-T loelemento(lo_iterador *i)
-{
+
+T ol_get_current(OLIterator *iter) {
     if(i->elemento != i->estrutura->sentinela)
         return i->elemento->dado;
 }
 
-T lopopelemento(lo_iterador *i)
-{
+
+T ol_pop_current(OLIterator *iter) {
     if(i->elemento != i->estrutura->sentinela)
     {
         lo_node *removido = i->elemento;
