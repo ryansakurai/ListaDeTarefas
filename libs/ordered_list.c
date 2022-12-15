@@ -13,10 +13,11 @@ void ol_init(OrderedList *list, int (*compare)(void *a, void *b)) {
 
 
 void ol_destroy(OrderedList *list) {
-    while(!lovazia(l))
-        lopopi(l);
+    while(!ol_is_empty(list))
+        ol_pop_first(list, NULL);
     
-    free(l->sentinela);
+    free(list->sentinel);
+    list->sentinel = NULL;
 }
 
 
