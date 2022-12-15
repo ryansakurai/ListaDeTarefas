@@ -63,13 +63,13 @@ bool ol_pop_last(OrderedList *list, T *output);
 /**
  * 
  */
-T ol_get_first(OrderedList *list);
+bool ol_get_first(OrderedList *list, T *output);
 
 
 /**
  * 
  */
-T ol_get_last(OrderedList *list);
+bool ol_get_last(OrderedList *list, T *output);
 
 
 /**

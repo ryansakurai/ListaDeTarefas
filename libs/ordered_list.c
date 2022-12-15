@@ -74,15 +74,25 @@ bool ol_pop_last(OrderedList *list, T *output) {
 }
 
 
-T ol_get_first(OrderedList *list) {
-    if(!lovazia(l))
-        return l->sentinela->prox->dado;
+bool ol_get_first(OrderedList *list, T *output) {
+    if(!ol_is_empty(list)) {
+        *output = list->sentinel->next->data;
+        return true;
+    }
+    else {
+        return false;
+    }
 }
 
 
-T ol_get_last(OrderedList *list) {
-    if(!lovazia(l))
-        return l->sentinela->ant->dado;
+bool ol_get_last(OrderedList *list, T *output) {
+    if(!ol_is_empty(list)) {
+        *output = list->sentinel->prev->data;
+        return true;
+    }
+    else {
+        return false;
+    }
 }
 
 
