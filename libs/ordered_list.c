@@ -131,24 +131,16 @@ T ol_get_current(OLIterator *iter) {
 
 
 T ol_pop_current(OLIterator *iter) {
-    if(i->elemento != i->estrutura->sentinela)
-    {
-        lo_node *removido = i->elemento;
-        T retorno = removido->dado;
+    OLNode *popped = iter->current;
+    T return_value = popped->data;
 
-        //removendo links da lista ao elemento
-        removido->ant->prox = removido->prox;
-        removido->prox->ant = removido->ant;
-        
-        //passando iterador para o proximo
-        i->elemento = i->elemento->prox;
+    popped->prev->next = popped->next;
+    popped->next->prev = popped->prev;
+    iter->current = iter->current->next;
+    free(popped);
+    iter->list->size--;
 
-        free(removido);
-
-        i->estrutura->tamanho--;
-
-        return retorno;
-    }
+    return return_value;
 }
 
 
