@@ -51,13 +51,13 @@ void ol_push(OrderedList *list, T data);
 /**
  * 
  */
-T ol_pop_first(OrderedList *list);
+bool ol_pop_first(OrderedList *list, T *output);
 
 
 /**
  * 
  */
-T ol_pop_last(OrderedList *list);
+bool ol_pop_last(OrderedList *list, T *output);
 
 
 /**

@@ -38,40 +38,40 @@ void ol_push(OrderedList *list, T data) {
 }
 
 
-T ol_pop_first(OrderedList *list) {
-    if(!lovazia(l))
-    {
-        lo_node *removido = l->sentinela->prox;
-        T retorno = removido->dado;
+bool ol_pop_first(OrderedList *list, T *output) {
+    if(!ol_is_empty(list)) {
+        OLNode *popped = list->sentinel->next;
+        if(output)
+            *output = popped->data;
 
-        //arrumando os links da lista
-        l->sentinela->prox = removido->prox;
-        l->sentinela->prox->ant = l->sentinela;
+        list->sentinel->next = popped->next;
+        list->sentinel->next->prev = list->sentinel;
+        free(popped);
+        list->size--;
 
-        free(removido);
-
-        l->tamanho--;
-
-        return retorno;
+        return true;
+    }
+    else {
+        return false;
     }
 }
 
 
-T ol_pop_last(OrderedList *list) {
-    if(!lovazia(l))
-    {
-        lo_node *removido = l->sentinela->ant;
-        T retorno = removido->dado;
+bool ol_pop_last(OrderedList *list, T *output) {
+    if(!ol_is_empty(list)) {
+        OLNode *popped = list->sentinel->prev;
+        if(output)
+            *output = popped->data;
 
-        //arrumando os links da lista
-        l->sentinela->ant = removido->ant;
-        l->sentinela->ant->prox = l->sentinela;
+        list->sentinel->prev = popped->prev;
+        list->sentinel->prev->next = list->sentinel;
+        free(popped);
+        list->size--;
 
-        free(removido);
-
-        l->tamanho--;
-
-        return retorno;
+        return true;
+    }
+    else {
+        return false;
     }
 }
 
