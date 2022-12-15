@@ -125,20 +125,8 @@ bool ol_iter_next(OLIterator *iter) {
 }
 
 
-bool ol_search(OLIterator *iter, int (*compare)(void *a, void *b), T data) {
-    //procurando o elemento
-    for(loiteradori(i->estrutura, i); !loacabou(i) && !(*cmp)(&dado, &i->elemento->dado); lomoverprox(i));
-
-    if(loacabou(i)) //quer dizer que a lista acabou e o elemento não foi encontrado
-        return false;
-    else
-        return true;
-}
-
-
 T ol_get_current(OLIterator *iter) {
-    if(i->elemento != i->estrutura->sentinela)
-        return i->elemento->dado;
+    return iter->current->data;
 }
 
 
@@ -161,4 +149,15 @@ T ol_pop_current(OLIterator *iter) {
 
         return retorno;
     }
+}
+
+
+bool ol_search(OLIterator *iter, int (*compare)(void *a, void *b), T data) {
+    //procurando o elemento
+    for(loiteradori(i->estrutura, i); !loacabou(i) && !(*cmp)(&dado, &i->elemento->dado); lomoverprox(i));
+
+    if(loacabou(i)) //quer dizer que a lista acabou e o elemento não foi encontrado
+        return false;
+    else
+        return true;
 }

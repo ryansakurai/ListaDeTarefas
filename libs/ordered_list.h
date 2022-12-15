@@ -99,12 +99,6 @@ bool ol_iter_next(OLIterator *iter);
 /**
  * 
  */
-bool ol_search(OLIterator *iter, int (*compare)(void *a, void *b), T data);
-
-
-/**
- * 
- */
 T ol_get_current(OLIterator *iter);
 
 
@@ -112,6 +106,12 @@ T ol_get_current(OLIterator *iter);
  * 
  */
 T ol_pop_current(OLIterator *iter);
+
+
+/**
+ * 
+ */
+bool ol_search(OLIterator *iter, int (*compare)(void *a, void *b), T data);
 
 
 #endif
