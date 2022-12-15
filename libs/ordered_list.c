@@ -102,9 +102,15 @@ bool ol_is_empty(OrderedList *list) {
 }
 
 
-void ol_iter_init(OLIterator *iter, OrderedList *list) {
-    i->estrutura = l;
-    i->elemento = l->sentinela->prox;
+bool ol_iter_init(OLIterator *iter, OrderedList *list) {
+    if(!ol_is_empty(list)) {
+        iter->list = list;
+        iter->current = list->sentinel->next;
+        return true;
+    }
+    else {
+        return false;
+    }
 }
 
 
