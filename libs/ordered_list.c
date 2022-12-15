@@ -6,9 +6,9 @@
 
 
 void ol_init(OrderedList *list, int (*compare)(void *a, void *b)) {
-    l->sentinela->ant = l->sentinela->prox = l->sentinela = (lo_node*) malloc(sizeof(lo_node));
-    l->tamanho = 0;
-    l->cmp = cmp;
+    list->sentinel->prev = list->sentinel->next = list->sentinel = malloc(sizeof(OLNode));
+    list->size = 0;
+    list->compare = compare;
 }
 
 
