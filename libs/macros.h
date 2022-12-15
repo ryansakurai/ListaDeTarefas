@@ -5,18 +5,23 @@
 #ifndef MACROS_H
 #define MACROS_H
 
-enum nivel {baixa, media, alta};
 
-typedef enum nivel nivel;
+enum Level {LOW, MID, HIGH};
+typedef enum Level Level;
 
-typedef struct atividade {
-  char texto[100];
-  nivel prioridade;
-} atividade;
+typedef struct Task {
+  char description[100];
+  Level priority;
+} Task;
 
-typedef struct acao {
-  char texto[10];
-  atividade atividade;
-} acao;
+
+enum Action {ADDITION, REMOVAL};
+typedef enum Action Action;
+
+typedef struct Modification {
+  Action description;
+  Task target;
+} Modification;
+
 
 #endif
