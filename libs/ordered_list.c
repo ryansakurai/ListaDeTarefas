@@ -94,7 +94,7 @@ unsigned ol_get_size(OrderedList *list) {
 
 
 bool ol_is_empty(OrderedList *list) {
-    if(l->tamanho)
+    if(list->size > 0)
         return false;
     else
         return true;
