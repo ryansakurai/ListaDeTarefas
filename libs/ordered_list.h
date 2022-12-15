@@ -87,13 +87,13 @@ bool ol_is_empty(OrderedList *list);
 /**
  * 
  */
-void ol_iter_init(OLIterator *iter, OrderedList *list);
+bool ol_iter_init(OLIterator *iter, OrderedList *list);
 
 
 /**
  * 
  */
-void ol_iter_next(OLIterator *iter);
+bool ol_iter_next(OLIterator *iter);
 
 
 /**

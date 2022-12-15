@@ -114,8 +114,14 @@ bool ol_iter_init(OLIterator *iter, OrderedList *list) {
 }
 
 
-void ol_iter_next(OLIterator *iter) {
-    i->elemento = i->elemento->prox;
+bool ol_iter_next(OLIterator *iter) {
+    if(iter->current->next != iter->list->sentinel) {
+        iter->current = iter->current->next;
+        return true;
+    }
+    else {
+        return false;
+    }
 }
 
 
