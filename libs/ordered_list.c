@@ -22,20 +22,17 @@ void ol_destroy(OrderedList *list) {
 
 
 void ol_push(OrderedList *list, T data) {
-    lo_node *novo = (lo_node*) malloc(sizeof(lo_node));
-    novo->dado = dado;
+    OLNode *new_node = malloc(sizeof(OLNode));
+    new_node->data = data;
 
-    //achando o elemento da lista que vai vir exatamente antes do node novo
-    lo_iterador i;
-    for(i.elemento = l->sentinela->ant; i.elemento != l->sentinela && (*l->cmp)(&novo->dado, &i.elemento->dado); lomoverant(&i));
+    OLIterator iter;
+    for(ol_iter_init(&iter, list); (*list->compare)(&iter.current->data, &new_node->data) && ol_iter_next(&iter); );
 
-    //inserindo node novo entre o elemento e o próximo
-    novo->ant = i.elemento;
-    novo->prox = i.elemento->prox;
-    novo->prox->ant = novo;
-    novo->ant->prox = novo;
-
-    l->tamanho++;
+    new_node->prev = iter.current;
+    new_node->next = iter.current->next;
+    new_node->next->prev = new_node;
+    new_node->prev->next = new_node;
+    list->size++;
 }
 
 
