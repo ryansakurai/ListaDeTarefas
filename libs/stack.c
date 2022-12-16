@@ -40,7 +40,9 @@ bool is_array_too_big(Stack *stack) {
 
 bool stack_pop(Stack *stack, U *output) {
     if(!stack_is_empty(stack)) {
-        *output = stack->array[stack->first_empty_index - 1];
+        if(output)
+            *output = stack->array[stack->first_empty_index - 1];
+
         stack->first_empty_index--;
 
         if(is_array_too_big(stack)) {
