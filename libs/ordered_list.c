@@ -152,11 +152,12 @@ T ol_pop_current(OLIterator *iter) {
 
 
 bool ol_search(OLIterator *iter, int (*compare)(void *a, void *b), T data) {
-    //procurando o elemento
-    for(loiteradori(i->estrutura, i); !loacabou(i) && !(*cmp)(&dado, &i->elemento->dado); lomoverprox(i));
+    OLIterator private_iter;
+    for(ol_iter_init(&private_iter, iter->list); ol_iter_next(&private_iter); )
+        if((*compare)(&data, &private_iter.current->data) == 0) {
+            iter->current = private_iter.current;
+            return true;
+        }
 
-    if(loacabou(i)) //quer dizer que a lista acabou e o elemento não foi encontrado
-        return false;
-    else
-        return true;
+    return false;
 }
