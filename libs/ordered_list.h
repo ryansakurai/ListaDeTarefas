@@ -26,12 +26,12 @@ typedef struct OLNode {
 typedef struct OrderedList {
     OLNode *sentinel;
     unsigned size;
-    int (*compare)(void *a, void *b);
+    int (*compare)(void *a, void *b); //function used to sort the list
 } OrderedList;
 
 typedef struct OLIterator {
     OrderedList *list;
-    OLNode *current;
+    OLNode *current_item;
 } OLIterator;
 
 
@@ -184,7 +184,7 @@ bool ol_iter_next(OLIterator *iter);
  * - True, if it was possible to get the item
  * - False, if the iterator isn't pointing to an item and it wasn't possible
  */
-bool ol_get_current(OLIterator *iter, T *output);
+bool ol_get_current_item(OLIterator *iter, T *output);
 
 
 /**
@@ -198,7 +198,7 @@ bool ol_get_current(OLIterator *iter, T *output);
  * - True, if it was possible to pop the item
  * - False, if the iterator isn't pointing to an item and it wasn't possible
  */
-bool ol_pop_current(OLIterator *iter, T *output);
+bool ol_pop_current_item(OLIterator *iter, T *output);
 
 
 /**
