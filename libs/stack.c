@@ -19,37 +19,42 @@ void stack_destroy(Stack *stack) {
 }
 
 
-void stack_push(Stack *stack, U data) {
-    //se o vetor estiver cheio, ele dobra de tamanho
-    if(ptamanho(p) == p->t_vetor)
-    {
-        p->vetor = (U*) realloc(p->vetor, (p->t_vetor*2) * sizeof(U));
-        p->t_vetor *= 2;
-    }
-
-    p->i_topo++;
-    p->vetor[p->i_topo] = dado;
+bool is_array_full(Stack *stack) {
+    return stack->array_size == stack_get_size(stack);
 }
 
 
-U stack_pop(Stack *stack) {
-    if(!pvazia(p))
-    {
-        U retorno = p->vetor[p->i_topo];
+void stack_push(Stack *stack, U data) {
+    if(is_array_full(stack)) {
+        stack->array_size *= 2;
+        stack->array = realloc(stack->array, stack->array_size * sizeof(U));
+    }
 
-        p->i_topo--;
+    stack->top_index++;
+    stack->array[stack->top_index] = data;
+}
 
-        /* se o tamanho da pilha for 1/4 do tamanho do vetor ou menos,
-           o vetor é divido ao meio */
-        if(p->t_vetor>1 && ptamanho(p) <= p->t_vetor/4)
-        {
-            p->vetor = (U*) realloc(p->vetor, (p->t_vetor/2) * sizeof(U));
-            p->t_vetor /= 2;
+
+bool is_array_too_big(Stack *stack) {
+    return stack->array_size > 1 && stack_get_size(stack) <= stack->array_size/4;
+}
+
+
+bool stack_pop(Stack *stack, U *output) {
+    if(!stack_is_empty(stack)) {
+        *output = stack->array[stack->top_index];
+        stack->top_index--;
+
+        if(is_array_too_big(stack)) {
+            stack->array_size /= 2;
+            stack->array = realloc(stack->array, stack->array_size * sizeof(U));
         }
-        //t_vetor==1 é excluido pois, nesse caso, o vetor já é minimo
 
-        return retorno;
-    }    
+        return true;
+    }
+    else {
+        return false;
+    }
 }
 
 
