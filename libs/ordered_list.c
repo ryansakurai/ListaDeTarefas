@@ -97,7 +97,7 @@ bool ol_get_last(OrderedList *list, T *output) {
 
 
 unsigned ol_get_size(OrderedList *list) {
-    return l->tamanho;
+    return list->size;
 }
 
 
