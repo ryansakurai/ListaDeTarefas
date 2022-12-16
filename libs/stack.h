@@ -46,13 +46,13 @@ void stack_push(Stack *stack, U data);
 /**
  * 
  */
-U stack_pop(Stack *stack);
+bool stack_pop(Stack *stack, U *output);
 
 
 /**
  * 
  */
-U stack_get_top(Stack *stack);
+bool stack_get_top(Stack *stack, U *output);
 
 
 /**

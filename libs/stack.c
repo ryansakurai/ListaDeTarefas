@@ -58,20 +58,21 @@ bool stack_pop(Stack *stack, U *output) {
 }
 
 
-U stack_get_top(Stack *stack) {
-    if(!pvazia(p))
-        return p->vetor[p->i_topo];
+bool stack_get_top(Stack *stack, U *output) {
+    if(!stack_is_empty(stack)) {
+        *output = stack->array[stack->top_index];
+        return true;
+    }
+    else {
+        return false;
+    }
 }
 
 
 unsigned stack_get_size(Stack *stack) {
-    return p->i_topo + 1;
+    return stack->top_index + 1;
 }
 
 
 bool stack_is_empty(Stack *stack) {
-    if(ptamanho(p))
-        return false;
-    else
-        return true;
-}
+    return stack_get_size(stack) <= 0;
