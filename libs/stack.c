@@ -74,3 +74,4 @@ unsigned stack_get_size(Stack *stack) {
 
 bool stack_is_empty(Stack *stack) {
     return stack_get_size(stack) <= 0;
+}
