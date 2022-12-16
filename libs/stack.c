@@ -4,19 +4,18 @@
 
 #include "stack.h"
 
-/* O i_topo de uma pilha é o índice do elemento que está no
-   topo. Quando a pilha está vazia, i_topo == -1 */
+#define INVALID -1
 
 
 void stack_init(Stack *stack) {
-    p->t_vetor = 1;
-    p->vetor = (U*) malloc(sizeof(U));
-    p->i_topo = -1;
+    stack->array_size = 1;
+    stack->array = malloc(stack->array_size * sizeof(U));
+    stack->top_index = INVALID;
 }
 
 
 void stack_destroy(Stack *stack) {
-    free(p->vetor);
+    free(stack->array);
 }
 
 
