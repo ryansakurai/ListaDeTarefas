@@ -20,7 +20,7 @@ typedef Modification U;
 typedef struct Stack
 {
     U *array;
-    int top_index;
+    unsigned first_empty_index;
     unsigned array_size;
 } Stack;
 
