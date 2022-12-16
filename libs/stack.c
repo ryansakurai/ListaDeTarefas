@@ -2,25 +2,25 @@
 //Ryan Sakurai
 //Vinicius Castro
 
-#include "pilha.h"
+#include "stack.h"
 
 /* O i_topo de uma pilha é o índice do elemento que está no
    topo. Quando a pilha está vazia, i_topo == -1 */
 
-void pinicializar(pilha *p)
-{
+
+void stack_init(Stack *stack) {
     p->t_vetor = 1;
     p->vetor = (U*) malloc(sizeof(U));
     p->i_topo = -1;
 }
 
-void pdestruir(pilha *p)
-{
+
+void stack_destroy(Stack *stack) {
     free(p->vetor);
 }
 
-void ppush(pilha *p, U dado)
-{
+
+void stack_push(Stack *stack, U data) {
     //se o vetor estiver cheio, ele dobra de tamanho
     if(ptamanho(p) == p->t_vetor)
     {
@@ -32,8 +32,8 @@ void ppush(pilha *p, U dado)
     p->vetor[p->i_topo] = dado;
 }
 
-U ppop(pilha *p)
-{
+
+U stack_pop(Stack *stack) {
     if(!pvazia(p))
     {
         U retorno = p->vetor[p->i_topo];
@@ -53,19 +53,19 @@ U ppop(pilha *p)
     }    
 }
 
-U ptopo(pilha *p)
-{
+
+U stack_get_top(Stack *stack) {
     if(!pvazia(p))
         return p->vetor[p->i_topo];
 }
 
-unsigned ptamanho(pilha *p)
-{
+
+unsigned stack_get_size(Stack *stack) {
     return p->i_topo + 1;
 }
 
-bool pvazia(pilha *p)
-{
+
+bool stack_is_empty(Stack *stack) {
     if(ptamanho(p))
         return false;
     else
