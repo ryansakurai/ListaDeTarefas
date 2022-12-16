@@ -102,10 +102,7 @@ unsigned ol_get_size(OrderedList *list) {
 
 
 bool ol_is_empty(OrderedList *list) {
-    if(list->size > 0)
-        return false;
-    else
-        return true;
+    return list->size <= 0;
 }
 
 
