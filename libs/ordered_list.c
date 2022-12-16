@@ -121,11 +121,6 @@ bool ol_iter_init(OLIterator *iter, OrderedList *list) {
 }
 
 
-bool ol_iter_is_linked(OLIterator *iter, OrderedList *list) {
-    return iter->list == list && iter->current != list->sentinel;
-}
-
-
 bool ol_iter_next(OLIterator *iter) {
     if(iter->current->next != iter->list->sentinel) {
         iter->current = iter->current->next;
@@ -136,33 +131,49 @@ bool ol_iter_next(OLIterator *iter) {
     }
 }
 
-
-T ol_get_current(OLIterator *iter) {
-    return iter->current->data;
+bool is_in_range(OLIterator *iter) {
+    return iter->current != iter->list->sentinel;
 }
 
 
-T ol_pop_current(OLIterator *iter) {
-    OLNode *popped = iter->current;
-    T return_value = popped->data;
+bool ol_get_current(OLIterator *iter, T *output) {
+    if(is_in_range(iter)) {
+        *output = iter->current->data;
+        return true;
+    }
+    else {
+        return false;
+    }
+}
 
-    popped->prev->next = popped->next;
-    popped->next->prev = popped->prev;
-    iter->current = iter->current->next;
-    free(popped);
-    iter->list->size--;
 
-    return return_value;
+bool ol_pop_current(OLIterator *iter, T *output) {
+    if(is_in_range(iter)) {
+        OLNode *popped = iter->current;
+        *output = popped->data;
+
+        popped->prev->next = popped->next;
+        popped->next->prev = popped->prev;
+        iter->current = iter->current->next;
+        free(popped);
+        iter->list->size--;
+
+        return true;
+    }
+    else {
+        return false;
+    }
 }
 
 
 bool ol_search(OLIterator *iter, int (*compare)(void *a, void *b), T data) {
     OLIterator private_iter;
-    for(ol_iter_init(&private_iter, iter->list); ol_iter_next(&private_iter); )
-        if((*compare)(&data, &private_iter.current->data) == 0) {
-            iter->current = private_iter.current;
-            return true;
-        }
+    if(ol_iter_init(&private_iter, iter->list))
+        while(ol_iter_next(&private_iter))
+            if((*compare)(&data, &private_iter.current->data) == 0) {
+                iter->current = private_iter.current;
+                return true;
+            }
 
     return false;
 }

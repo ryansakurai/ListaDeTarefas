@@ -161,19 +161,6 @@ bool ol_iter_init(OLIterator *iter, OrderedList *list);
 
 
 /**
- * Returns if the iterator is linked to the list
- * 
- * Parameters
- * - OLIterator *iter
- * - OrderedList *list: list to verify link
- * 
- * Returns: bool
- * - If it's linked to the list
- */
-bool ol_iter_is_linked(OLIterator *iter, OrderedList *list);
-
-
-/**
  * Moves the iterator to the next item in the list
  * 
  * Parameters
@@ -187,27 +174,31 @@ bool ol_iter_next(OLIterator *iter);
 
 
 /**
- * Returns the element currently being pointed by the iterator
+ * Stores the item currently being pointed by the iterator in a variable
  * 
  * Parameters
  * - OLIterator *iter
+ * - T *output - variable where the item is going to be stored
  * 
- * Returns: T
- * - The data of the element
+ * Returns: bool
+ * - True, if it was possible to get the item
+ * - False, if the iterator isn't pointing to an item and it wasn't possible
  */
-T ol_get_current(OLIterator *iter);
+bool ol_get_current(OLIterator *iter, T *output);
 
 
 /**
- * Pops and returns the the element currently being pointed by the iterator
+ * Pops and stores the item currently being pointed by the iterator in a variable
  * 
  * Parameters
  * - OLIterator *iter
+ * - T *output: variable where the item is going to be stored
  * 
- * Returns: T
- * - The data of the element
+ * Returns: bool
+ * - True, if it was possible to pop the item
+ * - False, if the iterator isn't pointing to an item and it wasn't possible
  */
-T ol_pop_current(OLIterator *iter);
+bool ol_pop_current(OLIterator *iter, T *output);
 
 
 /**
