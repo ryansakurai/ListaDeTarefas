@@ -121,6 +121,11 @@ bool ol_iter_init(OLIterator *iter, OrderedList *list) {
 }
 
 
+bool ol_iter_is_linked(OLIterator *iter, OrderedList *list) {
+    return iter->list == list && iter->current != list->sentinel;
+}
+
+
 bool ol_iter_next(OLIterator *iter) {
     if(iter->current->next != iter->list->sentinel) {
         iter->current = iter->current->next;
