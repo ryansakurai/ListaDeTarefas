@@ -212,7 +212,7 @@ bool ol_pop_current_item(OLIterator *iter, T *output);
  * Returns: bool
  * - If it was possible to find it
  */
-bool ol_search(OLIterator *iter, int (*equals)(void *a, void *b), T key);
+bool ol_search(OLIterator *iter, bool (*equals)(void *a, void *b), void *key);
 
 
 #endif
