@@ -139,8 +139,7 @@ void add_change(Stack *changes, Action description, Task target) {
 int read_task_to_remove(OrderedList list) {
     while(true) {
         char i_task_str[STR_LEN];
-        printf("Task index: ");
-        scanf(" %s", i_task_str);
+        input("Task index: ", i_task_str);
 
         if(str_is_num(i_task_str)) {
             int i_task = atoi(i_task_str);
@@ -170,6 +169,7 @@ bool is_task_index_equal(void *a, void *b) {
 
 Task remove_task(OrderedList *task_list, int index) {
     OLIterator iter;
+    ol_iter_init(&iter, task_list);
     ol_search(&iter, &is_task_index_equal, &index);
     Task task;
     ol_pop_current_item(&iter, &task);
