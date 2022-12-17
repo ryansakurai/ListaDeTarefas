@@ -153,6 +153,16 @@ int read_task_to_remove(OrderedList list) {
 }
 
 
+void update_indexes(OrderedList *list) {
+    int index = 1;
+    OLIterator iter;
+    if(ol_iter_init(&iter, list))
+        do {
+            iter.current_item->data.index = index++;
+        } while(ol_iter_next(&iter));
+}
+
+
 bool is_task_index_equal(void *a, void *b) {
     return ((Task*) a)->index == ((Task*) b)->index;
 }
@@ -210,6 +220,7 @@ int main() {
                 ol_push(&task_list, change.target);
         }
 
+        update_indexes(&task_list);
         printf("\n-=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-=-\n\n");
     }
 
