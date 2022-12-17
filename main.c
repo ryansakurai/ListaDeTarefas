@@ -97,7 +97,7 @@ Task read_task_to_add() {
     Task task;
     
     printf("Task: ");
-    task.description = read_description();
+    strcpy(task.description, read_description());
     printf("\n");
     
     printf("Priority (low/mid/high): ");
@@ -111,14 +111,14 @@ void add_change(Stack *changes, Action description, Task target) {
     Change change;
     change.description = description;
     change.target = target;
-    stack_push(&changes, change);
+    stack_push(changes, change);
 }
 
 
 bool str_is_num(char *string) {
     if(strlen(string) > 0) {
         for(int i=0; i < STR_LEN && string[i] != '\0'; i++)
-            if(!isdigit(string[i])
+            if(!isdigit(string[i]))
                 return false;
         return true;
     }
@@ -145,9 +145,14 @@ int read_task_to_remove(OrderedList list) {
 }
 
 
+bool is_task_index_equal(void *a, void *b) {
+    return ((Task*) a)->index == ((Task*) b)->index;
+}
+
+
 Task remove_task(OrderedList *task_list, int index) {
     OLIterator iter;
-    ol_search(&iter, &is_task_index_equal, &index))
+    ol_search(&iter, &is_task_index_equal, &index);
     Task task;
     ol_pop_current_item(&iter, &task);
     return task;
@@ -156,11 +161,6 @@ Task remove_task(OrderedList *task_list, int index) {
 
 int compare_tasks(void *a, void *b) {
     return ((Task*) a)->priority - ((Task*) b)->priority;
-}
-
-
-bool is_task_index_equal(void *a, void *b) {
-    return ((Task*) a)->index == ((Task*) b)->index;
 }
 
 
