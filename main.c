@@ -67,7 +67,7 @@ void str_to_lower(char *string) {
 
 char* read_description() {
     char description[100];
-    scanf("%s\n", description);
+    scanf("%s", description);
     if(strlen(description) > 0)
         return description;
     else
@@ -78,7 +78,7 @@ char* read_description() {
 Level read_priority() {
     while(true) {
         char priority[100];
-        scanf("%s\n", priority);
+        scanf("%s", priority);
         str_to_lower(priority);
         if(strcmp("low", priority))
             return LOW;
@@ -131,7 +131,7 @@ int read_task_to_remove(OrderedList list) {
     while(true) {
         char i_task_str[STR_LEN];
         printf("Task index: ");
-        scanf("%s\n", i_task_str);
+        scanf("%s", i_task_str);
 
         if(str_is_num(i_task_str)) {
             int i_task = atoi(i_task_str);
