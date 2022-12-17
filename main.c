@@ -22,6 +22,38 @@
 #define STR_LEN 100
 
 
+bool str_is_num(const char *string) {
+    if(strlen(string) > 0) {
+        for(int i=0; i < STR_LEN && string[i] != '\0'; i++)
+            if(!isdigit(string[i]))
+                return false;
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+
+void str_to_lower(char *string) {
+    for(int i=0; i < STR_LEN && string[i] != '\0'; i++)
+        if(isupper(string[i]))
+            string[i] = tolower(string[i]);
+}
+
+
+void input(const char *command, char *output) {
+    char c;
+    int i_char;
+
+    printf(command);
+    for(i_char=0; (c = getchar()) != '\n' && c != EOF; i_char++)
+        output[i_char] = c;
+
+    output[i_char] = '\0';
+}
+
+
 void print_list(OrderedList list) {
     OLIterator iter;
     if(ol_iter_init(&iter, &list)) {
@@ -39,35 +71,30 @@ void print_list(OrderedList list) {
 }
 
 
-char read_option() {
+int read_option() {
     while(true) {
         printf("[0] Exit program\n");
         printf("[1] Add task\n");
         printf("[2] Remove task\n");
         printf("[3] Undo\n");
 
-        int option;
-        printf("Option: ");
-        scanf("%d", &option);
+        char option_str[STR_LEN];
+        input("Option: ", option_str);
 
-        if(option >= 0 && option <= 3)
-            return option;
-        else
-            printf("Invalid option!\n\n");
+        if(str_is_num(option_str)) {
+            int option = atoi(option_str);
+            if(option >= 0 && option <= 3)
+                return option;
+        }
+
+        printf("Invalid option!\n\n");
     }
-}
-
-
-void str_to_lower(char *string) {
-    for(int i=0; i < STR_LEN && string[i] != '\0'; i++)
-        if(isupper(string[i]))
-            string[i] = tolower(string[i]);
 }
 
 
 void read_description(char *output) {
     while(true) {
-        scanf("%s", output);
+        input("Task: ", output);
         if(strlen(output) <= 0)
             printf("Invalid description!\n");
         else
@@ -76,34 +103,28 @@ void read_description(char *output) {
 }
 
 
-Level read_priority() {
+void read_priority(Level *output) {
     while(true) {
         char priority[100];
-        scanf("%s", priority);
+        input("Priority (low/mid/high): ", priority);
         str_to_lower(priority);
-        if(strcmp("low", priority))
-            return LOW;
-        else if(strcmp("mid", priority))
-            return MID;
-        else if(strcmp("high", priority))
-            return HIGH;
-        else
+
+        if(strcmp("low", priority) == 0) {
+            *output = LOW;
+            break;
+        }
+        else if(strcmp("mid", priority) == 0) {
+            *output = MID;
+            break;
+        }
+        else if(strcmp("high", priority) == 0) {
+            *output = HIGH;
+            break;
+        }
+        else {
             printf("Invalid priority level!\n");
+        }
     }
-}
-
-
-Task read_task_to_add() {
-    Task task;
-    
-    printf("Task: ");
-    read_description(task.description);
-    printf("\n");
-    
-    printf("Priority (low/mid/high): ");
-    task.priority = read_priority();
-
-    return task;
 }
 
 
@@ -115,24 +136,11 @@ void add_change(Stack *changes, Action description, Task target) {
 }
 
 
-bool str_is_num(char *string) {
-    if(strlen(string) > 0) {
-        for(int i=0; i < STR_LEN && string[i] != '\0'; i++)
-            if(!isdigit(string[i]))
-                return false;
-        return true;
-    }
-    else {
-        return false;
-    }
-}
-
-
 int read_task_to_remove(OrderedList list) {
     while(true) {
         char i_task_str[STR_LEN];
         printf("Task index: ");
-        scanf("%s", i_task_str);
+        scanf(" %s", i_task_str);
 
         if(str_is_num(i_task_str)) {
             int i_task = atoi(i_task_str);
@@ -180,7 +188,11 @@ int main() {
             break;
         }
         else if(option == 1) { //add task
-            Task task = read_task_to_add();
+            Task task;
+            read_description(task.description);
+            printf("\n");
+            read_priority(&task.priority);
+            
             ol_push(&task_list, task);
             add_change(&changes, ADDITION, task);
         }
@@ -197,6 +209,8 @@ int main() {
             else
                 ol_push(&task_list, change.target);
         }
+
+        printf("\n-=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-=-\n\n");
     }
 
     ol_destroy(&task_list);
