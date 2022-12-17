@@ -194,6 +194,7 @@ int main() {
         printf("\n");
 
         int option = read_option();
+        printf("\n");
         if(option == 0) { //exit program
             break;
         }
@@ -218,6 +219,7 @@ int main() {
                 remove_task(&task_list, change.target.index);
             else
                 ol_push(&task_list, change.target);
+            printf("There you go, undone!\n");
         }
 
         update_indexes(&task_list);
