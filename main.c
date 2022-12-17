@@ -46,15 +46,14 @@ char read_option() {
         printf("[2] Remove task\n");
         printf("[3] Undo\n");
 
-        char option[STR_LEN];
+        int option;
         printf("Option: ");
-        scanf("%s\n", option);
+        scanf("%d", &option);
 
-        if(strlen(option) == 1 && isdigit(option[0]))
-            if(option[0] >= '0' && option[0] <= '3')
-                return option[0];
-
-        printf("Invalid option!\n\n");
+        if(option >= 0 && option <= 3)
+            return option;
+        else
+            printf("Invalid option!\n\n");
     }
 }
 
@@ -175,16 +174,16 @@ int main() {
         print_list(task_list);
         printf("\n");
 
-        char option = read_option();
-        if(option == '0') { //exit program
+        int option = read_option();
+        if(option == 0) { //exit program
             break;
         }
-        else if(option == '1') { //add task
+        else if(option == 1) { //add task
             Task task = read_task_to_add();
             ol_push(&task_list, task);
             add_change(&changes, ADDITION, task);
         }
-        else if(option == '2') { //remove task
+        else if(option == 2) { //remove task
             int index = read_task_to_remove(task_list);
             Task task = remove_task(&task_list, index);
             add_change(&changes, REMOVAL, task);
