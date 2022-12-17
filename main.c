@@ -177,15 +177,15 @@ Task remove_task(OrderedList *task_list, int index) {
 }
 
 
-int compare_tasks(void *a, void *b) {
-    return ((Task*) a)->priority - ((Task*) b)->priority;
+bool move_down(void *a, void *b) {
+    return ((Task*) a)->priority < ((Task*) b)->priority;
 }
 
 
 int main() {
     OrderedList task_list;
     Stack changes;
-    ol_init(&task_list, &compare_tasks);
+    ol_init(&task_list, &move_down);
     stack_init(&changes);
 
     while(true) {

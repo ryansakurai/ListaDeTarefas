@@ -26,7 +26,7 @@ typedef struct OLNode {
 typedef struct OrderedList {
     OLNode *sentinel;
     unsigned size;
-    int (*compare)(void *a, void *b); //function used to sort the list
+    bool (*move_down)(void *a, void *b);
 } OrderedList;
 
 typedef struct OLIterator {
@@ -40,11 +40,11 @@ typedef struct OLIterator {
  * 
  * Parameters
  * - OrderedList *list
- * - int (*compare)(void *a, void *b): function used to sort the list (returns negative if a<b, positive if a>b and zero if a==b)
+ * - bool (*move_down)(void *a, void *b): function used to sort the list (true if a must be moved down from b)
  * 
  * Returns: void
  */
-void ol_init(OrderedList *list, int (*compare)(void *a, void *b));
+void ol_init(OrderedList *list, bool (*move_down)(void *a, void *b));
 
 
 /**
