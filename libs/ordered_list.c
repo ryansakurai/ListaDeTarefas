@@ -6,7 +6,8 @@
 
 
 void ol_init(OrderedList *list, int (*compare)(void *a, void *b)) {
-    list->sentinel->prev = list->sentinel->next = list->sentinel = malloc(sizeof(OLNode));
+    list->sentinel = malloc(sizeof(OLNode));
+    list->sentinel->prev = list->sentinel->next = list->sentinel;
     list->size = 0;
     list->compare = compare;
 }
