@@ -27,12 +27,19 @@ void ol_push(OrderedList *list, T data) {
     new_node->data = data;
 
     OLIterator iter;
-    for(ol_iter_init(&iter, list); (*list->compare)(&new_node->data, &iter.current_item->data) < 0 && ol_iter_next(&iter); );
-
-    new_node->prev = iter.current_item->prev;
-    new_node->next = iter.current_item;
-    new_node->next->prev = new_node;
-    new_node->prev->next = new_node;
+    if(ol_iter_init(&iter, list)) {
+        while((*list->compare)(&new_node->data, &iter.current_item->data) < 0 && ol_iter_next(&iter));
+        new_node->prev = iter.current_item->prev;
+        new_node->next = iter.current_item;
+        new_node->next->prev = new_node;
+        new_node->prev->next = new_node;
+    }
+    else {
+        new_node->next = new_node->prev = list->sentinel;
+        new_node->next->prev = new_node;
+        new_node->prev->next = new_node;
+    }
+    
     list->size++;
 }
 
