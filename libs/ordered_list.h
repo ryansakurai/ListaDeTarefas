@@ -206,13 +206,13 @@ bool ol_pop_current_item(OLIterator *iter, T *output);
  * 
  * Parameters
  * - OrderedList *iter
- * - int (*compare)(void *a, void *b): function used to find the item (0 if a==b and 1 if else)
- * - T data: data of the item to be searched for
+ * - bool (*equals)(void *a, void *b): function used to find the item
+ * - T key: key to be searched for
  * 
  * Returns: bool
  * - If it was possible to find it
  */
-bool ol_search(OLIterator *iter, int (*compare)(void *a, void *b), T data);
+bool ol_search(OLIterator *iter, int (*equals)(void *a, void *b), T key);
 
 
 #endif

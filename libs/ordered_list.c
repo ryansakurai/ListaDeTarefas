@@ -163,14 +163,15 @@ bool ol_pop_current_item(OLIterator *iter, T *output) {
 }
 
 
-bool ol_search(OLIterator *iter, int (*compare)(void *a, void *b), T data) {
+bool ol_search(OLIterator *iter, int (*equals)(void *a, void *b), T key) {
     OLIterator private_iter;
     if(ol_iter_init(&private_iter, iter->list))
-        while(ol_iter_next(&private_iter))
-            if((*compare)(&data, &private_iter.current_item->data) == 0) {
+        do {
+            if((*equals)(&key, &private_iter.current_item->data)) {
                 iter->current_item = private_iter.current_item;
                 return true;
             }
+        } while(ol_iter_next(&private_iter));
 
     return false;
 }
