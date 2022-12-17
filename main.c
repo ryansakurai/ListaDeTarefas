@@ -18,7 +18,8 @@ GtkWidget *scrolled_window, *button_box;
 GtkWidget *tasks, *priority_options, *add_input, *remove_input, *add_button, *remove_button, *undo_button;
 GtkTextBuffer *buffer;
 /*
- *  Widget hierarchy:
+ *  WIDGET HIERARCHY
+ *
  *  window
  *      container
  *          display_frame
