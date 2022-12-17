@@ -5,14 +5,17 @@
 #ifndef MACROS_H
 #define MACROS_H
 
+#include <time.h>
+
 
 enum Level {LOW, MID, HIGH};
 typedef enum Level Level;
 
 typedef struct Task {
-  unsigned index;
   char description[100];
   Level priority;
+  unsigned index;
+  time_t addition_moment;
 } Task;
 
 

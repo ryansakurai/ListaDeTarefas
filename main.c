@@ -14,6 +14,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
+#include <time.h>
 #include "libs/macros.h"
 #include "libs/ordered_list.h"
 #include "libs/stack.h"
@@ -178,7 +179,12 @@ Task remove_task(OrderedList *task_list, int index) {
 
 
 bool move_down(void *a, void *b) {
-    return ((Task*) a)->priority < ((Task*) b)->priority;
+    if(((Task*) a)->priority < ((Task*) b)->priority)
+        return true;
+    else if(((Task*) a)->priority == ((Task*) b)->priority && difftime(((Task*) a)->addition_moment, ((Task*) b)->priority) > 0)
+        return true;
+    else
+        return false;
 }
 
 
@@ -200,6 +206,7 @@ int main() {
         }
         else if(option == 1) { //add task
             Task task;
+            task.addition_moment = time(NULL);
             read_description(task.description);
             printf("\n");
             read_priority(&task.priority);
