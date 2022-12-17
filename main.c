@@ -65,13 +65,14 @@ void str_to_lower(char *string) {
 }
 
 
-char* read_description() {
-    char description[100];
-    scanf("%s", description);
-    if(strlen(description) > 0)
-        return description;
-    else
-        printf("Invalid description!\n");
+void read_description(char *output) {
+    while(true) {
+        scanf("%s", output);
+        if(strlen(output) <= 0)
+            printf("Invalid description!\n");
+        else
+            break;
+    }
 }
 
 
@@ -96,7 +97,7 @@ Task read_task_to_add() {
     Task task;
     
     printf("Task: ");
-    strcpy(task.description, read_description());
+    read_description(task.description);
     printf("\n");
     
     printf("Priority (low/mid/high): ");
