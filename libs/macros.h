@@ -10,6 +10,7 @@ enum Level {LOW, MID, HIGH};
 typedef enum Level Level;
 
 typedef struct Task {
+  unsigned index;
   char description[100];
   Level priority;
 } Task;
@@ -18,10 +19,10 @@ typedef struct Task {
 enum Action {ADDITION, REMOVAL};
 typedef enum Action Action;
 
-typedef struct Modification {
+typedef struct Change {
   Action description;
   Task target;
-} Modification;
+} Change;
 
 
 #endif

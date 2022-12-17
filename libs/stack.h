@@ -14,7 +14,7 @@
 #include <stdbool.h>
 #include "macros.h"
 
-typedef Modification U;
+typedef Change U;
 
 
 typedef struct Stack
