@@ -242,12 +242,16 @@ int main() {
         }
         else { //undo
             Change change;
-            stack_pop(&changes, &change);
-            if(change.description == ADDITION)
-                remove_task_by_timestamp(&task_list, change.target.timestamp);
-            else
-                ol_push(&task_list, change.target);
-            printf("There you go, undone!\n");
+            if(stack_pop(&changes, &change)) {
+                if(change.description == ADDITION)
+                    remove_task_by_timestamp(&task_list, change.target.timestamp);
+                else
+                    ol_push(&task_list, change.target);
+                printf("There you go, undone!\n");
+            }
+            else {
+                printf("Nothing to be undone.\n");
+            }
         }
 
         update_indexes(&task_list);
