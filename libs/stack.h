@@ -76,38 +76,38 @@ bool stack_pop(Stack *stack, U *output);
  * Stores the top item of the stack in a variable
  * 
  * Parameters
- * - Stack *stack
+ * - Stack stack
  * - U *output: variable where the item will be stored
  * 
  * Returns: bool
  * - True if it was possible to get the item
  * - False if the stack is empty and it wasn't possible
  */
-bool stack_get_top(Stack *stack, U *output);
+bool stack_get_top(Stack stack, U *output);
 
 
 /**
  * Returns the size of the stack
  * 
  * Parameters
- * - Stack *stack
+ * - Stack stack
  * 
  * Returns: unsigned
  * - The size of the stack
  */
-unsigned stack_get_size(Stack *stack);
+unsigned stack_get_size(Stack stack);
 
 
 /**
  * Returns if the stack is empty
  * 
  * Parameters
- * - Stack *stack
+ * - Stack stack
  * 
  * Returns: bool
  * - If the stack is empty
  */
-bool stack_is_empty(Stack *stack);
+bool stack_is_empty(Stack stack);
 
 
 #endif

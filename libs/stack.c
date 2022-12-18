@@ -18,13 +18,13 @@ void stack_destroy(Stack *stack) {
 }
 
 
-bool is_array_full(Stack *stack) {
-    return stack->array_size == stack_get_size(stack);
+bool is_array_full(Stack stack) {
+    return stack.array_size == stack_get_size(stack);
 }
 
 
 void stack_push(Stack *stack, U data) {
-    if(is_array_full(stack)) {
+    if(is_array_full(*stack)) {
         stack->array_size *= 2;
         stack->array = realloc(stack->array, stack->array_size * sizeof(U));
     }
@@ -33,19 +33,19 @@ void stack_push(Stack *stack, U data) {
 }
 
 
-bool is_array_too_big(Stack *stack) {
-    return stack->array_size > 1 && stack_get_size(stack) <= stack->array_size/4;
+bool is_array_too_big(Stack stack) {
+    return stack.array_size > 1 && stack_get_size(stack) <= stack.array_size/4;
 }
 
 
 bool stack_pop(Stack *stack, U *output) {
-    if(!stack_is_empty(stack)) {
+    if(!stack_is_empty(*stack)) {
         if(output)
             *output = stack->array[stack->first_empty_index - 1];
 
         stack->first_empty_index--;
 
-        if(is_array_too_big(stack)) {
+        if(is_array_too_big(*stack)) {
             stack->array_size /= 2;
             stack->array = realloc(stack->array, stack->array_size * sizeof(U));
         }
@@ -58,9 +58,9 @@ bool stack_pop(Stack *stack, U *output) {
 }
 
 
-bool stack_get_top(Stack *stack, U *output) {
+bool stack_get_top(Stack stack, U *output) {
     if(!stack_is_empty(stack)) {
-        *output = stack->array[stack->first_empty_index - 1];
+        *output = stack.array[stack.first_empty_index - 1];
         return true;
     }
     else {
@@ -69,11 +69,11 @@ bool stack_get_top(Stack *stack, U *output) {
 }
 
 
-unsigned stack_get_size(Stack *stack) {
-    return stack->first_empty_index;
+unsigned stack_get_size(Stack stack) {
+    return stack.first_empty_index;
 }
 
 
-bool stack_is_empty(Stack *stack) {
+bool stack_is_empty(Stack stack) {
     return stack_get_size(stack) <= 0;
 }
