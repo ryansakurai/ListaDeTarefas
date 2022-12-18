@@ -184,7 +184,7 @@ Task remove_task(OrderedList *task_list, int index) {
 bool move_down(void *a, void *b) {
     if(((Task*) a)->priority < ((Task*) b)->priority)
         return true;
-    else if(((Task*) a)->priority == ((Task*) b)->priority && difftime(((Task*) a)->addition_moment, ((Task*) b)->priority) > 0)
+    else if(((Task*) a)->priority == ((Task*) b)->priority && difftime(((Task*) a)->addition_moment, ((Task*) b)->addition_moment) > 0)
         return true;
     else
         return false;
