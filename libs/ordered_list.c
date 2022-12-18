@@ -187,11 +187,11 @@ bool ol_pop_current_item(OLIterator *iter, T *output) {
 }
 
 
-bool ol_search(OLIterator *iter, bool (*equals)(void *key, void *list_item), void *key) {
+bool ol_search(OLIterator *iter, bool (*equals)(void *a, void *b), T key) {
     OLIterator private_iter;
     if(ol_iter_init(&private_iter, iter->list))
         do {
-            if((*equals)(key, &private_iter.current_item->data)) {
+            if((*equals)(&key, &private_iter.current_item->data)) {
                 iter->current_item = private_iter.current_item;
                 return true;
             }
