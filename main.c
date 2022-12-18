@@ -169,9 +169,12 @@ bool is_task_index_equal(void *a, void *b) {
 
 
 Task remove_task(OrderedList *task_list, int index) {
+    Task dummy_for_ol_search;
+    dummy_for_ol_search.index = index;
+
     OLIterator iter;
     ol_iter_init(&iter, task_list);
-    ol_search(&iter, &is_task_index_equal, &index);
+    ol_search(&iter, &is_task_index_equal, dummy_for_ol_search);
     Task task;
     ol_pop_current_item(&iter, &task);
     return task;
