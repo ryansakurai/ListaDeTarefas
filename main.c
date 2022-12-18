@@ -160,16 +160,6 @@ int read_task_to_remove(OrderedList list) {
 }
 
 
-void update_indexes(OrderedList *list) {
-    int index = 1;
-    OLIterator iter;
-    if(ol_iter_init(&iter, list))
-        do {
-            iter.current_item->data.index = index++;
-        } while(ol_iter_next(&iter));
-}
-
-
 bool is_task_index_equal(void *a, void *b) {
     return ((Task*) a)->index == ((Task*) b)->index;
 }
@@ -203,6 +193,16 @@ Task remove_task_by_timestamp(OrderedList *task_list, time_t timestamp) {
     Task task;
     ol_pop_current_item(&iter, &task);
     return task;
+}
+
+
+void update_indexes(OrderedList *list) {
+    int index = 1;
+    OLIterator iter;
+    if(ol_iter_init(&iter, list))
+        do {
+            iter.current_item->data.index = index++;
+        } while(ol_iter_next(&iter));
 }
 
 
