@@ -100,50 +100,50 @@ bool ol_pop_last(OrderedList *list, T *output);
  * Stores the first item of the list in a variable
  * 
  * Parameters
- * - OrderedList *list
+ * - OrderedList list
  * - T *output: variable where the item will be stored
  * 
  * Returns: bool
  * - If it was possible to get the item
  */
-bool ol_get_first(OrderedList *list, T *output);
+bool ol_get_first(OrderedList list, T *output);
 
 
 /**
  * Stores the last item of the list in a variable
  * 
  * Parameters
- * - OrderedList *list
+ * - OrderedList list
  * - T *output: variable where the item will be stored
  * 
  * Returns: bool
  * - If it was possible to get the item
  */
-bool ol_get_last(OrderedList *list, T *output);
+bool ol_get_last(OrderedList list, T *output);
 
 
 /**
  * Returns the size of the list
  * 
  * Parameters
- * - OrderedList *list
+ * - OrderedList list
  * 
  * Returns: unsigned
  * - The size of the list
  */
-unsigned ol_get_size(OrderedList *list);
+unsigned ol_get_size(OrderedList list);
 
 
 /**
  * Returns if the list is empty
  * 
  * Parameters
- * - OrderedList *list
+ * - OrderedList list
  * 
  * Returns: bool
  * - If the list is empty
  */
-bool ol_is_empty(OrderedList *list);
+bool ol_is_empty(OrderedList list);
 
 
 /**
@@ -177,14 +177,14 @@ bool ol_iter_next(OLIterator *iter);
  * Stores the item currently being pointed by the iterator in a variable
  * 
  * Parameters
- * - OLIterator *iter
+ * - OLIterator iter
  * - T *output - variable where the item is going to be stored
  * 
  * Returns: bool
  * - True, if it was possible to get the item
  * - False, if the iterator isn't pointing to an item and it wasn't possible
  */
-bool ol_get_current_item(OLIterator *iter, T *output);
+bool ol_get_current_item(OLIterator iter, T *output);
 
 
 /**

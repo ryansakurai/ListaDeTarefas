@@ -61,7 +61,7 @@ void print_list(OrderedList list) {
         unsigned index = 1;
         do {
             Task task;
-            ol_get_current_item(&iter, &task);
+            ol_get_current_item(iter, &task);
             char priority[STR_LEN];
             if(task.priority == LOW)
                 strcpy(priority, "LOW");
@@ -161,7 +161,7 @@ int read_task_to_remove(OrderedList list) {
 
         if(str_is_num(i_task_str)) {
             int i_task = atoi(i_task_str);
-            if(i_task > 0 && i_task <= ol_get_size(&list))
+            if(i_task > 0 && i_task <= ol_get_size(list))
                 return i_task;
         }
 
