@@ -182,13 +182,13 @@ Task remove_task_by_index(OrderedList *task_list, int index) {
 
 
 bool is_task_timestamp_equal(void *a, void *b) {
-    return ((Task*) a)->addition_moment == ((Task*) b)->addition_moment;
+    return ((Task*) a)->timestamp == ((Task*) b)->timestamp;
 }
 
 
 Task remove_task_by_timestamp(OrderedList *task_list, time_t timestamp) {
     Task dummy_for_ol_search;
-    dummy_for_ol_search.addition_moment = timestamp;
+    dummy_for_ol_search.timestamp = timestamp;
 
     OLIterator iter;
     ol_iter_init(&iter, task_list);
@@ -202,7 +202,7 @@ Task remove_task_by_timestamp(OrderedList *task_list, time_t timestamp) {
 bool move_down(void *a, void *b) {
     if(((Task*) a)->priority < ((Task*) b)->priority)
         return true;
-    else if(((Task*) a)->priority == ((Task*) b)->priority && difftime(((Task*) a)->addition_moment, ((Task*) b)->addition_moment) > 0)
+    else if(((Task*) a)->priority == ((Task*) b)->priority && difftime(((Task*) a)->timestamp, ((Task*) b)->timestamp) > 0)
         return true;
     else
         return false;
@@ -227,7 +227,7 @@ int main() {
         }
         else if(option == 1) { //add task
             Task task;
-            task.addition_moment = time(NULL);
+            task.timestamp = time(NULL);
             read_description(task.description);
             printf("\n");
             read_priority(&task.priority);
@@ -244,7 +244,7 @@ int main() {
             Change change;
             stack_pop(&changes, &change);
             if(change.description == ADDITION)
-                remove_task_by_timestamp(&task_list, change.target.addition_moment);
+                remove_task_by_timestamp(&task_list, change.target.timestamp);
             else
                 ol_push(&task_list, change.target);
             printf("There you go, undone!\n");

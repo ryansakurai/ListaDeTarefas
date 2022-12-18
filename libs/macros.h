@@ -15,7 +15,7 @@ typedef struct Task {
   char description[100];
   Level priority;
   unsigned index;
-  time_t addition_moment;
+  time_t timestamp;
 } Task;
 
 
