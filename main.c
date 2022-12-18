@@ -168,13 +168,31 @@ bool is_task_index_equal(void *a, void *b) {
 }
 
 
-Task remove_task(OrderedList *task_list, int index) {
+Task remove_task_by_index(OrderedList *task_list, int index) {
     Task dummy_for_ol_search;
     dummy_for_ol_search.index = index;
 
     OLIterator iter;
     ol_iter_init(&iter, task_list);
     ol_search(&iter, &is_task_index_equal, dummy_for_ol_search);
+    Task task;
+    ol_pop_current_item(&iter, &task);
+    return task;
+}
+
+
+bool is_task_timestamp_equal(void *a, void *b) {
+    return ((Task*) a)->addition_moment == ((Task*) b)->addition_moment;
+}
+
+
+Task remove_task_by_timestamp(OrderedList *task_list, time_t timestamp) {
+    Task dummy_for_ol_search;
+    dummy_for_ol_search.addition_moment = timestamp;
+
+    OLIterator iter;
+    ol_iter_init(&iter, task_list);
+    ol_search(&iter, &is_task_timestamp_equal, dummy_for_ol_search);
     Task task;
     ol_pop_current_item(&iter, &task);
     return task;
@@ -219,14 +237,14 @@ int main() {
         }
         else if(option == 2) { //remove task
             int index = read_task_to_remove(task_list);
-            Task task = remove_task(&task_list, index);
+            Task task = remove_task_by_index(&task_list, index);
             add_change(&changes, REMOVAL, task);
         }
         else { //undo
             Change change;
             stack_pop(&changes, &change);
             if(change.description == ADDITION)
-                remove_task(&task_list, change.target.index);
+                remove_task_by_timestamp(&task_list, change.target.addition_moment);
             else
                 ol_push(&task_list, change.target);
             printf("There you go, undone!\n");
