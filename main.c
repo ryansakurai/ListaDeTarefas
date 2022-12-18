@@ -62,7 +62,14 @@ void print_list(OrderedList list) {
         do {
             Task task;
             ol_get_current_item(&iter, &task);
-            printf("%u. %s\n", index, task.description);
+            char priority[STR_LEN];
+            if(task.priority == LOW)
+                strcpy(priority, "LOW");
+            else if(task.priority == MID)
+                strcpy(priority, "MID");
+            else
+                strcpy(priority, "HIGH");
+            printf("%u. %s  [%s]\n", index, task.description, priority);
             index++;
         } while(ol_iter_next(&iter));
     }
