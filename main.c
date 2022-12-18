@@ -136,6 +136,16 @@ void read_priority(Level *output) {
 }
 
 
+Task create_task() {
+    Task task;
+    task.timestamp = time(NULL);
+    read_description(task.description);
+    printf("\n");
+    read_priority(&task.priority);
+    return task;
+}
+
+
 void add_change(Stack *changes, Action description, Task target) {
     Change change;
     change.description = description;
@@ -233,12 +243,7 @@ int main() {
             break;
         }
         else if(option == 1) { //add task
-            Task task;
-            task.timestamp = time(NULL);
-            read_description(task.description);
-            printf("\n");
-            read_priority(&task.priority);
-            
+            Task task = create_task();
             ol_push(&task_list, task);
             add_change(&changes, ADDITION, task);
         }
